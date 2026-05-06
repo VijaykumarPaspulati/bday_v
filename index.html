@@ -7,40 +7,40 @@
 <style>
 body {
     margin: 0;
-    font-family: 'Comic Sans MS', cursive;
-    text-align: center;
-    overflow-x: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: white;
 }
 
-/* FIRST PAGE BACKGROUND */
+/* Background */
 .bg {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: url('https://images.unsplash.com/photo-1518717758536-85ae29035b6d') center/cover;
-    filter: blur(8px) brightness(0.8);
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px) brightness(0.9);
     z-index: -2;
 }
 
-/* overlay for soft color */
+/* Overlay */
 .overlay {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255,182,193,0.5), rgba(255,255,255,0.6));
+    background: rgba(0,0,0,0.2);
     z-index: -1;
 }
 
-/* glass card */
+/* Card */
 .card {
-    margin-top: 100px;
-    display: inline-block;
+    margin-top: 120px;
+    text-align: center;
+    background: rgba(255,255,255,0.75);
+    color: #333;
     padding: 25px;
     border-radius: 20px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: fadeIn 1s ease;
+    display: inline-block;
 }
 
 h1 { color: #ff4d6d; }
@@ -52,129 +52,159 @@ input {
 }
 
 button {
-    margin-top: 10px;
     padding: 10px 20px;
+    margin: 10px;
     background: #ff4d6d;
     border: none;
     color: white;
     border-radius: 10px;
     cursor: pointer;
+    position: relative;
 }
 
-button:hover {
-    background: #ff1e4d;
+/* RUNAWAY NO BUTTON 😈 */
+#noBtn {
+    position: relative;
+    transition: 0.2s;
+}
+
+/* FINAL PAGE */
+.final {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: center/cover no-repeat;
+}
+
+.dark {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+}
+
+.content {
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5em;
+}
+
+.quote {
+    margin-top: 15px;
+    font-size: 1.3em;
+    color: #ffd1dc;
 }
 
 .hidden { display: none; }
-
-/* photo glow */
-img {
-    width: 240px;
-    border-radius: 20px;
-    margin-top: 15px;
-    transform: scale(0);
-    animation: pop 1s forwards;
-    box-shadow: 0 0 25px rgba(255,77,109,0.6);
-}
-
-@keyframes pop {
-    to { transform: scale(1); }
-}
-
-/* floating hearts & sparkles */
-.float {
-    position: fixed;
-    font-size: 20px;
-    animation: floatUp linear infinite;
-    opacity: 0.7;
-}
-
-@keyframes floatUp {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
-}
-
-.message {
-    margin-top: 15px;
-    font-size: 1.3em;
-    color: #ff3399;
-    animation: fadeInUp 1.2s ease;
-}
-
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
-}
-
-@keyframes fadeInUp {
-    from {opacity:0; transform: translateY(20px);}
-    to {opacity:1; transform: translateY(0);}
-}
 </style>
-
 </head>
 
 <body>
 
-<div class="bg"></div>
+<div id="bg" class="bg"></div>
 <div class="overlay"></div>
 
-<!-- floating hearts -->
-<script>
-const emojis = ["💖","✨","🐶","💕"];
-for (let i = 0; i < 20; i++) {
-    let el = document.createElement("div");
-    el.className = "float";
-    el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.animationDuration = (6 + Math.random()*6) + "s";
-    document.body.appendChild(el);
-}
-</script>
-
+<!-- STEP 1 -->
 <div id="step1" class="card">
     <h1>Hey 👀</h1>
-    <p>Only special person can unlock this 💖</p>
-    <input id="bday" placeholder="07/05/2007">
+    <p>Tell me your DOB 💖</p>
+    <input id="dob" placeholder="07/05/2006">
     <br>
-    <button onclick="checkBday()">Unlock 🔐</button>
-    <p id="error" style="color:red;"></p>
+    <button onclick="checkDOB()">Unlock 🔐</button>
 </div>
 
+<!-- STEP 2 -->
 <div id="step2" class="card hidden">
-    <h2>It’s really you 😏</h2>
-    <p>Do you want your surprise? 🎁</p>
-    <button onclick="showSurprise()">Yes 🥺💖</button>
+    <h2>Do you want to see the surprise? 🎁</h2>
+
+    <button onclick="nextStep()">Yes 💖</button>
+    <button id="noBtn" onmouseover="runAway()">No 😶</button>
 </div>
 
-<div id="step3" class="card hidden">
-    <h1>Happy Birthday HER_NAME 🎂🐾</h1>
+<!-- FINAL -->
+<div id="finalPage" class="hidden final">
+    <div class="dark"></div>
+    <div class="content">
+        <div class="title">Happy Birthday Princessuuuuuuuuuu🎂</div>
+        <div class="quote">
+            “Alwayss a fan of your eddi navvuu<br><br>
+             💖 ”
+        </div>
+    </div>
+</div>
 
-    <img src="v_img_2.jpeg">
-
-    <div class="message">
-        🐶 You’re literally as cute as a puppy 🐶 <br><br>
-        And just like them, you make everything feel warm and happy 💖 <br><br>
-        I hope your day is full of love, smiles, <br>
-        and lots of adorable moments 🐾✨ <br><br>
-        Stay the beautiful soul you are 🥺💫
+<!-- NO PAGE -->
+<div id="noPage" class="hidden final">
+    <div class="dark"></div>
+    <div class="content">
+        <div class="title">😐 Really?</div>
+        <div class="quote">
+            “Entey balsindha No antunav 🐶”
+        </div>
+        <button onclick="goBack()">gud close and go back 😭</button>
     </div>
 </div>
 
 <script>
-function checkBday() {
-    let input = document.getElementById("bday").value;
-    if (input === "07/05/2007") {
+const bg = document.getElementById("bg");
+
+/* nicer dog backgrounds */
+const backgrounds = [
+    "https://images.unsplash.com/photo-1558788353-f76d92427f16",
+    "https://images.unsplash.com/photo-1583337130417-3346a1be7dee"
+];
+
+bg.style.backgroundImage = `url(${backgrounds[0]})`;
+
+function checkDOB() {
+    let input = document.getElementById("dob").value;
+    if (input === "07/05/2006") {
         document.getElementById("step1").classList.add("hidden");
         document.getElementById("step2").classList.remove("hidden");
-    } else {
-        document.getElementById("error").innerText = "Wrong birthday 😝";
+        bg.style.backgroundImage = `url(${backgrounds[1]})`;
     }
 }
 
-function showSurprise() {
+/* YES */
+function nextStep() {
     document.getElementById("step2").classList.add("hidden");
-    document.getElementById("step3").classList.remove("hidden");
+    document.getElementById("bg").style.display = "none";
+
+    let final = document.getElementById("finalPage");
+    final.style.backgroundImage = "url('v_img_2.jpeg')";
+    final.classList.remove("hidden");
+}
+
+/* NO PAGE */
+function runAway() {
+    let btn = document.getElementById("noBtn");
+
+    let x = Math.random() * 200 - 100;
+    let y = Math.random() * 100 - 50;
+
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+/* if somehow clicked NO via tap */
+document.getElementById("noBtn").addEventListener("click", function() {
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("bg").style.display = "none";
+
+    let noPage = document.getElementById("noPage");
+    noPage.style.backgroundImage = "url('https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8')";
+    noPage.classList.remove("hidden");
+});
+
+/* go back */
+function goBack() {
+    document.getElementById("noPage").classList.add("hidden");
+    document.getElementById("bg").style.display = "block";
+    document.getElementById("step2").classList.remove("hidden");
 }
 </script>
 
