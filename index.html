@@ -5,8 +5,6 @@
 <title>For You 💖</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -44,7 +42,6 @@ body {
     padding: 25px;
     border-radius: 20px;
     display: inline-block;
-    animation: fadeIn 0.8s ease;
 }
 
 h1 { color: #ff4d6d; }
@@ -87,19 +84,22 @@ button:hover {
     background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
 }
 
+/* 👇 FIXED CONTENT POSITION */
 .content {
     position: absolute;
-    bottom: 80px;
+    bottom: 10%;
     width: 100%;
     text-align: center;
     animation: fadeIn 1.5s ease;
 }
 
+/* TITLE moved slightly lower */
 .title {
     font-size: 2.5em;
+    margin-bottom: 15px;
 }
 
-/* POEM STYLE */
+/* POEM */
 .quote {
     margin-top: 15px;
     font-size: 1.3em;
@@ -109,13 +109,13 @@ button:hover {
     line-height: 1.6;
 }
 
-/* NO button runaway */
+/* NO button */
 #noBtn {
     position: relative;
     transition: 0.2s ease;
 }
 
-/* ANIMATIONS */
+/* ANIMATION */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -146,7 +146,7 @@ button:hover {
     <button id="noBtn" onmouseover="runAway()">No 😶</button>
 </div>
 
-<!-- FINAL PAGE -->
+<!-- FINAL -->
 <div id="finalPage" class="hidden final">
     <div class="dark"></div>
     <div class="content">
@@ -160,6 +160,8 @@ and long dark hair like a dreamy stream.
 
 A dusky glow, so soft and true,  
 with jokes that make the world feel new 💖
+
+            Allways a fan of your eddi navvuuuuuuuuuu
         </div>
     </div>
 </div>
@@ -170,9 +172,9 @@ with jokes that make the world feel new 💖
     <div class="content">
         <div class="title">😐 Really?</div>
         <div class="quote">
-Even this serious dog is judging you 🐶
+Entey Balsindhaa No antunav🐶
         </div>
-        <button onclick="goBack()">Okay fine 😭</button>
+        <button onclick="goBack()">Gud close and click here 😭</button>
     </div>
 </div>
 
@@ -210,7 +212,7 @@ function nextStep() {
     final.classList.remove("hidden");
 }
 
-/* NO RUNAWAY */
+/* RUNAWAY NO */
 function runAway() {
     let btn = document.getElementById("noBtn");
 
