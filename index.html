@@ -84,16 +84,17 @@ button:hover {
     background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
 }
 
-/* 👇 FIXED CONTENT POSITION */
+/* 👇 FIXED POSITION (IMPORTANT CHANGE) */
 .content {
     position: absolute;
-    bottom: 10%;
+    bottom: 18%;   /* moved up so it doesn't cover face */
     width: 100%;
     text-align: center;
     animation: fadeIn 1.5s ease;
+    padding: 0 20px;
 }
 
-/* TITLE moved slightly lower */
+/* TITLE */
 .title {
     font-size: 2.5em;
     margin-bottom: 15px;
@@ -101,12 +102,15 @@ button:hover {
 
 /* POEM */
 .quote {
-    margin-top: 15px;
-    font-size: 1.3em;
+    margin-top: 10px;
+    font-size: 1.2em;
     color: #ffd1dc;
     font-family: 'Pacifico', cursive;
     white-space: pre-line;
     line-height: 1.6;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* NO button */
@@ -159,9 +163,9 @@ Cute little eyes that always gleam,
 and long dark hair like a dreamy stream.  
 
 A dusky glow, so soft and true,  
-with jokes that make the world feel new 💖
+with jokes that make the world feel new 💖  
 
-            Always Fan of your eyes and eddi navvuuu
+Always fan of your eyes and eddi navvuuu 😄
         </div>
     </div>
 </div>
@@ -172,9 +176,9 @@ with jokes that make the world feel new 💖
     <div class="content">
         <div class="title">😐 Really?</div>
         <div class="quote">
-Entey Balsindha No antunav 🐶
+Entey baadha anipinchindha No anukunnav 🐶
         </div>
-        <button onclick="goBack()">Gudd close and click here 😭</button>
+        <button onclick="goBack()">Okay fine 😭</button>
     </div>
 </div>
 
