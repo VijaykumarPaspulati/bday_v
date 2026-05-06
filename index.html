@@ -5,6 +5,8 @@
 <title>For You 💖</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -21,6 +23,7 @@ body {
     background-position: center;
     filter: blur(3px) brightness(0.9);
     z-index: -2;
+    transition: 0.5s ease;
 }
 
 /* Overlay */
@@ -41,6 +44,7 @@ body {
     padding: 25px;
     border-radius: 20px;
     display: inline-block;
+    animation: fadeIn 0.8s ease;
 }
 
 h1 { color: #ff4d6d; }
@@ -59,6 +63,11 @@ button {
     color: white;
     border-radius: 10px;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
 }
 
 .hidden { display: none; }
@@ -83,23 +92,33 @@ button {
     bottom: 80px;
     width: 100%;
     text-align: center;
+    animation: fadeIn 1.5s ease;
 }
 
 .title {
     font-size: 2.5em;
 }
 
+/* POEM STYLE */
 .quote {
     margin-top: 15px;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #ffd1dc;
+    font-family: 'Pacifico', cursive;
     white-space: pre-line;
+    line-height: 1.6;
 }
 
-/* NO button */
+/* NO button runaway */
 #noBtn {
     position: relative;
-    transition: 0.2s;
+    transition: 0.2s ease;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -127,18 +146,19 @@ button {
     <button id="noBtn" onmouseover="runAway()">No 😶</button>
 </div>
 
-<!-- FINAL -->
+<!-- FINAL PAGE -->
 <div id="finalPage" class="hidden final">
     <div class="dark"></div>
     <div class="content">
         <div class="title">Happy Birthday Princess 🎂</div>
-        <div class="quote">
-She dances like music the night can’t hide,
-with naughty laughter she lights up the vibe.
-Cute little eyes that always gleam,
-and long dark hair like a dreamy stream.
 
-A dusky glow, so soft and true,
+        <div class="quote">
+She dances like music the night can’t hide,  
+with naughty laughter she lights up the vibe.  
+Cute little eyes that always gleam,  
+and long dark hair like a dreamy stream.  
+
+A dusky glow, so soft and true,  
 with jokes that make the world feel new 💖
         </div>
     </div>
@@ -150,7 +170,7 @@ with jokes that make the world feel new 💖
     <div class="content">
         <div class="title">😐 Really?</div>
         <div class="quote">
-“Entey baadha anipinchindha No anukunnav 🐶”
+Even this serious dog is judging you 🐶
         </div>
         <button onclick="goBack()">Okay fine 😭</button>
     </div>
@@ -159,7 +179,7 @@ with jokes that make the world feel new 💖
 <script>
 const bg = document.getElementById("bg");
 
-/* dog backgrounds */
+/* backgrounds */
 const backgrounds = [
     "https://images.unsplash.com/photo-1558788353-f76d92427f16",
     "https://images.unsplash.com/photo-1583337130417-3346a1be7dee"
@@ -194,8 +214,8 @@ function nextStep() {
 function runAway() {
     let btn = document.getElementById("noBtn");
 
-    let x = Math.random() * 200 - 100;
-    let y = Math.random() * 100 - 50;
+    let x = (Math.random() - 0.5) * 250;
+    let y = (Math.random() - 0.5) * 120;
 
     btn.style.transform = `translate(${x}px, ${y}px)`;
 }
