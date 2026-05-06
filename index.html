@@ -1,28 +1,223 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: white;
+}
+
+/* Background */
+.bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px) brightness(0.9);
+    z-index: -2;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    z-index: -1;
+}
+
+/* Card */
+.card {
+    margin-top: 120px;
+    text-align: center;
+    background: rgba(255,255,255,0.75);
+    color: #333;
+    padding: 25px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+h1 { color: #ff4d6d; }
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.hidden { display: none; }
+
+/* FINAL PAGE */
+.final {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: center/cover no-repeat;
+}
+
+.dark {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+}
+
+.content {
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5em;
+}
 
 .quote {
-    font-family: 'Pacifico', cursive;
+    margin-top: 15px;
     font-size: 1.2em;
     color: #ffd1dc;
     white-space: pre-line;
-    animation: fadeIn 2s ease;
 }
 
-/* typing effect */
-.typing {
-    display: inline-block;
-    overflow: hidden;
-    border-right: 2px solid #ffd1dc;
-    white-space: nowrap;
-    animation: typing 6s steps(80, end), blink 0.8s infinite;
-    max-width: 100%;
+/* NO button */
+#noBtn {
+    position: relative;
+    transition: 0.2s;
+}
+</style>
+</head>
+
+<body>
+
+<div id="bg" class="bg"></div>
+<div class="overlay"></div>
+
+<!-- STEP 1 -->
+<div id="step1" class="card">
+    <h1>Hey 👀</h1>
+    <p>Tell me your DOB 💖</p>
+    <input id="dob" placeholder="07/05/2006">
+    <br>
+    <button onclick="checkDOB()">Unlock 🔐</button>
+    <p id="error" style="color:red;"></p>
+</div>
+
+<!-- STEP 2 -->
+<div id="step2" class="card hidden">
+    <h2>Do you want to see the surprise? 🎁</h2>
+
+    <button onclick="nextStep()">Yes 💖</button>
+    <button id="noBtn" onmouseover="runAway()">No 😶</button>
+</div>
+
+<!-- FINAL -->
+<div id="finalPage" class="hidden final">
+    <div class="dark"></div>
+    <div class="content">
+        <div class="title">Happy Birthday Princess 🎂</div>
+        <div class="quote">
+She dances like music the night can’t hide,
+with naughty laughter she lights up the vibe.
+Cute little eyes that always gleam,
+and long dark hair like a dreamy stream.
+
+A dusky glow, so soft and true,
+with jokes that make the world feel new 💖
+        </div>
+    </div>
+</div>
+
+<!-- NO PAGE -->
+<div id="noPage" class="hidden final">
+    <div class="dark"></div>
+    <div class="content">
+        <div class="title">😐 Really?</div>
+        <div class="quote">
+“Entey baadha anipinchindha No anukunnav 🐶”
+        </div>
+        <button onclick="goBack()">Okay fine 😭</button>
+    </div>
+</div>
+
+<script>
+const bg = document.getElementById("bg");
+
+/* dog backgrounds */
+const backgrounds = [
+    "https://images.unsplash.com/photo-1558788353-f76d92427f16",
+    "https://images.unsplash.com/photo-1583337130417-3346a1be7dee"
+];
+
+bg.style.backgroundImage = `url(${backgrounds[0]})`;
+
+/* DOB check */
+function checkDOB() {
+    let input = document.getElementById("dob").value;
+
+    if (input === "07/05/2006") {
+        document.getElementById("step1").classList.add("hidden");
+        document.getElementById("step2").classList.remove("hidden");
+        bg.style.backgroundImage = `url(${backgrounds[1]})`;
+    } else {
+        document.getElementById("error").innerText = "Wrong DOB 😅";
+    }
 }
 
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+/* YES */
+function nextStep() {
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("bg").style.display = "none";
+
+    let final = document.getElementById("finalPage");
+    final.style.backgroundImage = "url('v_img_2.jpeg')";
+    final.classList.remove("hidden");
 }
 
-@keyframes blink {
-    50% { border-color: transparent; }
+/* NO RUNAWAY */
+function runAway() {
+    let btn = document.getElementById("noBtn");
+
+    let x = Math.random() * 200 - 100;
+    let y = Math.random() * 100 - 50;
+
+    btn.style.transform = `translate(${x}px, ${y}px)`;
 }
+
+/* NO CLICK */
+document.getElementById("noBtn").addEventListener("click", function() {
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("bg").style.display = "none";
+
+    let noPage = document.getElementById("noPage");
+    noPage.style.backgroundImage =
+        "url('https://images.ctfassets.net/sfnkq8lmu5d7/7oZxV67zss1p11WN17Ttjj/e0a7f7d681d8614175d804aa21cae732/The-Wildest_Editorial_Peeved-Pups_Hero_v01.jpg?w=1000&h=750&q=70&fm=webp')";
+    noPage.classList.remove("hidden");
+});
+
+/* BACK */
+function goBack() {
+    document.getElementById("noPage").classList.add("hidden");
+    document.getElementById("bg").style.display = "block";
+    document.getElementById("step2").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
