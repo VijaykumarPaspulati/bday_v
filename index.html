@@ -59,14 +59,9 @@ button {
     color: white;
     border-radius: 10px;
     cursor: pointer;
-    position: relative;
 }
 
-/* RUNAWAY NO BUTTON 😈 */
-#noBtn {
-    position: relative;
-    transition: 0.2s;
-}
+.hidden { display: none; }
 
 /* FINAL PAGE */
 .final {
@@ -96,11 +91,16 @@ button {
 
 .quote {
     margin-top: 15px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     color: #ffd1dc;
+    white-space: pre-line;
 }
 
-.hidden { display: none; }
+/* NO button */
+#noBtn {
+    position: relative;
+    transition: 0.2s;
+}
 </style>
 </head>
 
@@ -116,6 +116,7 @@ button {
     <input id="dob" placeholder="07/05/2006">
     <br>
     <button onclick="checkDOB()">Unlock 🔐</button>
+    <p id="error" style="color:red;"></p>
 </div>
 
 <!-- STEP 2 -->
@@ -130,16 +131,15 @@ button {
 <div id="finalPage" class="hidden final">
     <div class="dark"></div>
     <div class="content">
-        <div class="title">Happy Birthday Princessuuuuuuuuuu🎂</div>
+        <div class="title">Happy Birthday Princess 🎂</div>
         <div class="quote">
-            “She dances like music the night can’t hide,
+She dances like music the night can’t hide,
 with naughty laughter she lights up the vibe.
 Cute little eyes that always gleam,
 and long dark hair like a dreamy stream.
 
 A dusky glow, so soft and true,
-with jokes that make the world feel new 💖<br><br>
-             💖 ”
+with jokes that make the world feel new 💖
         </div>
     </div>
 </div>
@@ -150,16 +150,16 @@ with jokes that make the world feel new 💖<br><br>
     <div class="content">
         <div class="title">😐 Really?</div>
         <div class="quote">
-            “Entey balsindha No antunav 🐶”
+“Entey baadha anipinchindha No anukunnav 🐶”
         </div>
-        <button onclick="goBack()">gud close and go back 😭</button>
+        <button onclick="goBack()">Okay fine 😭</button>
     </div>
 </div>
 
 <script>
 const bg = document.getElementById("bg");
 
-/* nicer dog backgrounds */
+/* dog backgrounds */
 const backgrounds = [
     "https://images.unsplash.com/photo-1558788353-f76d92427f16",
     "https://images.unsplash.com/photo-1583337130417-3346a1be7dee"
@@ -167,12 +167,16 @@ const backgrounds = [
 
 bg.style.backgroundImage = `url(${backgrounds[0]})`;
 
+/* DOB check */
 function checkDOB() {
     let input = document.getElementById("dob").value;
+
     if (input === "07/05/2006") {
         document.getElementById("step1").classList.add("hidden");
         document.getElementById("step2").classList.remove("hidden");
         bg.style.backgroundImage = `url(${backgrounds[1]})`;
+    } else {
+        document.getElementById("error").innerText = "Wrong DOB 😅";
     }
 }
 
@@ -186,7 +190,7 @@ function nextStep() {
     final.classList.remove("hidden");
 }
 
-/* NO PAGE */
+/* NO RUNAWAY */
 function runAway() {
     let btn = document.getElementById("noBtn");
 
@@ -196,17 +200,18 @@ function runAway() {
     btn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-/* if somehow clicked NO via tap */
+/* NO CLICK */
 document.getElementById("noBtn").addEventListener("click", function() {
     document.getElementById("step2").classList.add("hidden");
     document.getElementById("bg").style.display = "none";
 
     let noPage = document.getElementById("noPage");
-    noPage.style.backgroundImage = "url('https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8')";
+    noPage.style.backgroundImage =
+        "url('https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8')";
     noPage.classList.remove("hidden");
 });
 
-/* go back */
+/* BACK */
 function goBack() {
     document.getElementById("noPage").classList.add("hidden");
     document.getElementById("bg").style.display = "block";
